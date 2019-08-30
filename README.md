@@ -19,3 +19,8 @@ It supports ArtNet with unlimited Universes (ok nearly unlimited).
  - ArtNet Support
  - Unlimited Universes
  - ...
+
+## Dependencies
+ - Angular
+ - Spring Boot
+ - We use parts of the [ArtNet4j](https://github.com/cansik/artnet4j) Library
