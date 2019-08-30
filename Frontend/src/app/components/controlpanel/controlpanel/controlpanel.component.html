@@ -1,0 +1,20 @@
+<button mat-fab class="settings-button" (click)="menuOpen=!menuOpen" [attr.menuopen]="menuOpen">
+    <mat-icon>edit</mat-icon>
+</button>
+<div class="menu-wrapper" [attr.menuopen]="menuOpen">
+    <button mat-fab class="menu-button" (click)="addPanel()">
+        +
+    </button>
+</div>
+<div class="panel" *ngFor="let panel of controlPanel?.data.panels" 
+    [style.left]="panel.dimensions.x+'px'" 
+    [style.top]="panel.dimensions.y+'px'"
+    [style.width]="panel.dimensions.width+'px'" 
+    [style.height]="panel.dimensions.height+'px'"
+    (keydown)="$event.key=='del' && removePanel(panel)">
+    <button 
+    *ngIf="panel.type=='button'" 
+    (keydown)="removePanel(panel)"
+    [style.backgroundColor]="panel.styles?.backgroundActive"
+    [style.color]="panel.styles?.colorActive">ABC</button>
+</div>

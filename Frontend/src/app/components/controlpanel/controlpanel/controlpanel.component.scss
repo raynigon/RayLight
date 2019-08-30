@@ -1,0 +1,41 @@
+.settings-button{
+    position: absolute;
+    z-index: 10050;
+    bottom: 25px;
+    right: 25px;
+    mat-icon{
+        transition: transform 250ms ease-in-out;
+    }
+    &[menuopen="true"]{
+        mat-icon{
+            transform: rotate(90deg)
+        }
+    }
+}
+
+.menu-wrapper {
+    position: absolute;
+    z-index: 10040;
+    bottom: 25px;
+    right: 25px;
+    opacity: 0;
+    transition: bottom 250ms, opacity 250ms;
+    
+    .menu-button {
+        display: block;
+        margin-bottom: 25px;
+    }
+
+    &[menuopen="true"]{
+        opacity: 1;
+        bottom: 80px;
+    }
+}
+
+.panel {
+    position: absolute;
+}
+.panel > * {
+    width: 100%;
+    height: 100%;
+}

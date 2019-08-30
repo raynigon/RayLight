@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1-controlpanel-init
+      author: simon-schneider
+      changes:
+        - createTable:
+            tableName: controlpanel
+            columns:
+              - column:
+                  name: id
+                  type: varchar(64)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+              - column:
+                  name: changed
+                  type: DATETIME
+              - column:
+                  name: data
+                  type: TEXT

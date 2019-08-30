@@ -34,13 +34,14 @@ public class ArtNetService {
     public void init() throws SocketException {
         socket = new DatagramSocket(6454);
         socket.setBroadcast(true);
-        universes.add(new DMXUniverse(1));
     }
 
     @Scheduled(fixedRate = 10)
     public void handleSendCycle() {
+        if (universes.isEmpty()) {
+            return;
+        }
         universes.stream().parallel().forEach(this::sendArtNetPackage);
-        log.info("Next Round");
     }
 
     @SneakyThrows

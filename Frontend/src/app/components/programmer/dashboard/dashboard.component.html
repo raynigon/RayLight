@@ -1,0 +1,6 @@
+<h1>Dashboard</h1>
+
+<button (click)="create()">Create</button>
+<ul>
+    <li *ngFor="let panel of panels" [routerLink]="'/controlpanel/'+panel.id">{{panel.name}}</li>
+</ul>
