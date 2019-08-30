@@ -4,13 +4,18 @@
 ![Docker Pulls](https://img.shields.io/docker/pulls/raynigon/raylight)
 ![Docker Stars](https://img.shields.io/docker/stars/raynigon/raylight)
 ](https://hub.docker.com/r/raynigon/raylight)
-Web based DMX Control App
+
+## Description
+RayLight is an Web based Light Control Application.
+It supports ArtNet with unlimited Universes (ok nearly unlimited).
 
 ## Installation
-`TODO`
-
-Simply pull the Docker container and run it.
+1. Run the Server as a Docker Container: `docker run --restart=always -p 8080:8080 raynigon/raylight`
+2. Now you can open the app in your local browser with: [http://localhost:8080](http://localhost:8080)
+3. Configure your ArtNet Adapter and start playing around
 
 ## Features
 
-`TODO`
+ - ArtNet Support
+ - Unlimited Universes
+ - ...
