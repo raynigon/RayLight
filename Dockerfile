@@ -18,6 +18,6 @@ FROM openjdk:12-alpine
 EXPOSE 8080
 WORKDIR /app/
 COPY --from=1 /ws/target/RayLight-*.jar RayLight.jar
-RUN cmod 775 RayLight.jar
+RUN chmod 775 RayLight.jar
 
 CMD ["java", "-jar", "RayLight.jar"]
