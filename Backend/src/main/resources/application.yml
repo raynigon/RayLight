@@ -12,6 +12,5 @@ spring:
 app:
   artnet:
     outputs:
-      - name: "Test Output"
+      - name: "ArtNet0"
         address: 192.168.2.102
-        universes: [0]

@@ -2,3 +2,6 @@ databaseChangeLog:
   - include:
       file: controlpanel-1.0.0.yaml
       relativeToChangelogFile: true
+  - include:
+      file: universemetadata-1.0.0.yaml
+      relativeToChangelogFile: true

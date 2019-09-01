@@ -3,16 +3,18 @@ package com.raynigon.raylight.model;
 public class DMXUniverse {
 
     public static final int CHANNELS_IN_UNIVERSE = 512;
-    private int id;
+
+    private final UniverseMetaData information;
+
     private int[] channels;
 
-    public DMXUniverse(int id){
-        this.id = id;
+    public DMXUniverse(UniverseMetaData information){
+        this.information = information;
         channels = new int[CHANNELS_IN_UNIVERSE];
     }
 
     public int getId() {
-        return id;
+        return information.getId();
     }
 
     public void setValue(int channel, int value){

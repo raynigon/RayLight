@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2-universemetadata-init
+      author: simon-schneider
+      changes:
+        - createTable:
+            tableName: universemetadata
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: output
+                  type: varchar(255)

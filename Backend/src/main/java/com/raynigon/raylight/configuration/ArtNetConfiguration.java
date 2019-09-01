@@ -2,15 +2,15 @@ package com.raynigon.raylight.configuration;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 
 import com.raynigon.raylight.model.ArtNetDMXOutput;
 import com.raynigon.raylight.model.DMXUniverse;
 import com.raynigon.raylight.model.config.ArtNetConfigProperties;
+import com.raynigon.raylight.repository.UniverseMetaDataRepository;
 import com.raynigon.raylight.service.ArtNetService;
+import com.raynigon.raylight.service.DMXUniverseService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -25,6 +25,7 @@ public class ArtNetConfiguration {
 
     private final ArtNetConfigProperties properties;
     private final ArtNetService service;
+    private final DMXUniverseService universeService;
     private List<DMXUniverse> universes = new ArrayList<>();
     private int i = 0;
 
@@ -32,17 +33,20 @@ public class ArtNetConfiguration {
     public void init() {
         properties.getOutputs().stream().map(props -> {
             ArtNetDMXOutput output = new ArtNetDMXOutput(props.getName(), props.getAddress());
-            for (int i : props.getUniverses()) {
-                DMXUniverse universe = new DMXUniverse(i);
-                output.addUniverse(universe);
-                universes.add(universe);
-            }
+            universeService.getAllForOutput(output.getName()).forEach(output::addUniverse);
+            universes.addAll(output.listUniverses());
             return output;
         }).forEach(service::addOutput);
     }
 
-    @Scheduled(fixedRate = 10, initialDelay = 1000)
+    /**
+     * Dummy Logic for testing the ArtNet Interface
+     * */
+    //@Scheduled(fixedRate = 10, initialDelay = 1000)
     public void updateUniverse() {
+        if(universes.isEmpty()){
+            return;
+        }
         DMXUniverse universe = universes.get(0);
         double x = i / 200.0;
         universe.setValue(0, getValue(x, 1.5));
