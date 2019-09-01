@@ -1,17 +1,14 @@
 package com.raynigon.raylight.service;
 
-import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
-
+import com.raynigon.raylight.model.ArtNetDMXOutput;
 import com.raynigon.raylight.model.DMXUniverse;
 import com.raynigon.raylight.model.artnet.ArtDmxPacket;
 import com.raynigon.raylight.model.artnet.PacketType;
@@ -26,32 +23,38 @@ import org.springframework.stereotype.Service;
 @Service
 public class ArtNetService {
 
+    private InetAddress address;
     private DatagramSocket socket;
-    private List<DMXUniverse> universes = new ArrayList<>();
+    private List<ArtNetDMXOutput> outputs = new ArrayList<>();
     private Map<Integer, Long> sequenceIds = new HashMap<>();
 
-    @PostConstruct
-    public void init() throws SocketException {
+    @SneakyThrows
+    public ArtNetService(){
         socket = new DatagramSocket(6454);
-        socket.setBroadcast(true);
     }
 
-    @Scheduled(fixedRate = 10)
+    public void addOutput(ArtNetDMXOutput output) {
+        outputs.add(output);
+    }
+
+    @Scheduled(fixedRate = 20)
     public void handleSendCycle() {
-        if (universes.isEmpty()) {
+        if (outputs.isEmpty()) {
             return;
         }
-        universes.stream().parallel().forEach(this::sendArtNetPackage);
+        for (ArtNetDMXOutput output : outputs) {
+            output.listUniverses().forEach(universe -> sendArtNetPackage(output.getInetAddress(), universe));
+        }
     }
 
     @SneakyThrows
-    private void sendArtNetPackage(DMXUniverse universe) {
+    private void sendArtNetPackage(InetAddress address, DMXUniverse universe) {
         ArtDmxPacket artNetPacket = PacketType.ART_OUTPUT.createPacket();
         artNetPacket.setSequenceID(getNextSequenceId(universe));
         artNetPacket.setUniverse(0, universe.getId());
         artNetPacket.setDMX(universe.toArtNet());
         DatagramPacket datagramPacket = new DatagramPacket(artNetPacket.getData(), artNetPacket.getLength());
-        datagramPacket.setAddress(InetAddress.getByName("255.255.255.255")); //TODO make this per Interface to make Routers forward this message
+        datagramPacket.setAddress(address);
         datagramPacket.setPort(6454);
         socket.send(datagramPacket);
     }
