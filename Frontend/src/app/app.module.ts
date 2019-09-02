@@ -8,19 +8,44 @@ import { DashboardComponent } from './components/programmer/dashboard/dashboard.
 import { ControlPanelComponent } from './components/controlpanel/controlpanel/controlpanel.component';
 import { ControlPanelService } from './services/ControlPanelService';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatIconModule } from '@angular/material';
+import { MatButtonModule, MatIconModule, MatMenuModule, MatDialogModule, MatExpansionModule, MatFormFieldModule, MatInputModule, MatSelectModule } from '@angular/material';
+import { DMXService } from './services/DMXService';
+import { ButtonPanelComponent } from './components/controlpanel/buttonpanel/buttonpanel.component';
+import { SliderPanelComponent } from './components/controlpanel/sliderpanel/sliderpanel.component';
+import { ButtonEditDialogComponent } from './components/controlpanel/editdialogs/buttoneditdialog/buttoneditdialog.component';
+import { FormsModule } from '@angular/forms';
+import { SliderEditDialogComponent } from './components/controlpanel/editdialogs/slidereditdialog/slidereditdialog.component';
 
 @NgModule({
-  declarations: [AppComponent, DashboardComponent, ControlPanelComponent],
+  declarations: [
+    AppComponent,
+    DashboardComponent,
+    ControlPanelComponent,
+    ButtonPanelComponent,
+    SliderPanelComponent,
+    ButtonEditDialogComponent,
+    SliderEditDialogComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    FormsModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatMenuModule,
+    MatDialogModule,
+    MatExpansionModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
   ],
-  providers: [ControlPanelService],
+  entryComponents: [
+    ButtonEditDialogComponent,
+    SliderEditDialogComponent,
+  ],
+  providers: [ControlPanelService, DMXService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

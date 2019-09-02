@@ -34,8 +34,47 @@
 
 .panel {
     position: absolute;
+    user-select: none;
 }
-.panel > * {
+
+.edit-overlay {
+    display: none;
+    position: absolute;
     width: 100%;
     height: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: move;
+    z-index: 1000;
+}
+
+.panel[edit="true"] .edit-overlay{
+    display: block;
+}
+
+.edit-corner {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border: 1px solid black;
+    background-color: white;
+    &.edit-corner-top-left {
+        top: 0px;
+        left: 0px;
+        cursor: nwse-resize;
+    }
+    &.edit-corner-top-right {
+        top: 0px;
+        right: 0px;
+        cursor: nesw-resize;
+    }
+    &.edit-corner-bottom-left {
+        bottom: 0px;
+        left: 0px;
+        cursor: nesw-resize;
+    }
+    &.edit-corner-bottom-right {
+        bottom: 0px;
+        right: 0px;
+        cursor: nwse-resize;
+    }
 }

@@ -1,0 +1,15 @@
+<div class="slider-panel"
+    [style.backgroundColor]="backgroundColor"
+    [style.color]="color"
+    (mouseleave)="initialOffset = null; initialPageOffset = null"
+    (mouseup)="initialOffset = null; initialPageOffset = null">
+    <span class="slider-header" [attr.orientation] = "orientation">{{content}}</span>
+    <div class="slider-bar" [attr.orientation] = "orientation"></div>
+    <div class="slider-knob" 
+        [attr.orientation] = "orientation"
+        [style.right]="knobPositionX"
+        [style.bottom]="knobPositionY"
+        (mousedown)="startMove($event)"
+        (mouseup)="initialOffset = null; initialPageOffset = null"
+        (mousemove)="initialOffset != null && moveKnob($event)"></div>
+</div>

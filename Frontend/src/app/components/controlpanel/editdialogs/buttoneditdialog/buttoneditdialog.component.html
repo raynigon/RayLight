@@ -1,0 +1,52 @@
+<h2 mat-dialog-title>Edit Button</h2>
+<mat-dialog-content>
+    <mat-accordion>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                General
+            </mat-expansion-panel-header>
+            <mat-form-field class="form-field">
+                <input matInput [(ngModel)]="data.description" placeholder="Description">
+            </mat-form-field>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                Action
+            </mat-expansion-panel-header>
+            <mat-form-field class="form-field">
+                <mat-label>Type</mat-label>
+                <mat-select [(ngModel)]="data.action.type">
+                    <mat-option value="set-dmx-value">Set DMX Value</mat-option>
+                    <mat-option value="toggle-dmx-value">Toggle DMX Value</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="form-field">
+                <input matInput type="number" min="0" max="512" [(ngModel)]="data.action.channel" placeholder="Channel">
+            </mat-form-field>
+            <mat-form-field class="form-field">
+                <input matInput type="number" min="0" max="255" [(ngModel)]="data.action.value" placeholder="Value">
+            </mat-form-field>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                Style
+            </mat-expansion-panel-header>
+            <mat-form-field class="form-field">
+                <input matInput type="color" [(ngModel)]="data.styles.colorActive" placeholder="Active Color">
+            </mat-form-field>
+            <mat-form-field class="form-field">
+                <input matInput type="color" [(ngModel)]="data.styles.colorInactive" placeholder="Inactive Color">
+            </mat-form-field>
+            <mat-form-field class="form-field">
+                <input matInput type="color" [(ngModel)]="data.styles.backgroundActive" placeholder="Active Background Color">
+            </mat-form-field>
+            <mat-form-field class="form-field">
+                <input matInput type="color" [(ngModel)]="data.styles.backgroundInactive" placeholder="Inactive Background Color">
+            </mat-form-field>
+        </mat-expansion-panel>
+    </mat-accordion>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button [mat-dialog-close]="data">Save</button>
+</mat-dialog-actions>

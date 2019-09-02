@@ -1,20 +1,34 @@
-<button mat-fab class="settings-button" (click)="menuOpen=!menuOpen" [attr.menuopen]="menuOpen">
+<button mat-fab class="settings-button" (click)="toggleEditMode()" [attr.menuopen]="editMode">
     <mat-icon>edit</mat-icon>
 </button>
-<div class="menu-wrapper" [attr.menuopen]="menuOpen">
-    <button mat-fab class="menu-button" (click)="addPanel()">
+<div class="menu-wrapper" [attr.menuopen]="editMode">
+    <button mat-fab class="menu-button" [matMenuTriggerFor]="createPanelMenu">
         +
     </button>
 </div>
-<div class="panel" *ngFor="let panel of controlPanel?.data.panels" 
+<mat-menu #createPanelMenu="matMenu">
+    <button mat-menu-item (click)="addPanel('button')">Button</button>
+    <button mat-menu-item (click)="addPanel('slider')">Slider</button>
+</mat-menu>
+<div class="panel" *ngFor="let panel of controlPanel?.data.panels"
+    [attr.edit]="editMode" 
     [style.left]="panel.dimensions.x+'px'" 
     [style.top]="panel.dimensions.y+'px'"
     [style.width]="panel.dimensions.width+'px'" 
     [style.height]="panel.dimensions.height+'px'"
-    (keydown)="$event.key=='del' && removePanel(panel)">
-    <button 
-    *ngIf="panel.type=='button'" 
-    (keydown)="removePanel(panel)"
-    [style.backgroundColor]="panel.styles?.backgroundActive"
-    [style.color]="panel.styles?.colorActive">ABC</button>
+    [tabindex]="editMode && '0'" 
+    (keydown)="removePanel(panel, $event)">
+    <div class="edit-overlay" 
+        draggable="true" 
+        (click)="editPanel(panel, $event)"
+        (dragstart)="dragInit=[$event.offsetX, $event.offsetY]"
+        (drag)="move(panel, $event)" 
+        (keydown)="removePanel(panel, $event)">
+        <div class="edit-corner edit-corner-top-left" draggable="true" (drag)="resize(panel, 'nw', $event)"></div>
+        <div class="edit-corner edit-corner-top-right" draggable="true" (drag)="resize(panel, 'ne', $event)"></div>
+        <div class="edit-corner edit-corner-bottom-left" draggable="true" (drag)="resize(panel, 'sw', $event)"></div>
+        <div class="edit-corner edit-corner-bottom-right" draggable="true" (drag)="resize(panel, 'se', $event)"></div>
+    </div>
+    <app-buttonpanel *ngIf="panel.type=='button'" [data]="panel"></app-buttonpanel>
+    <app-sliderpanel *ngIf="panel.type=='slider'" [data]="panel"></app-sliderpanel>
 </div>
