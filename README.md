@@ -10,9 +10,9 @@ RayLight is an Web based Light Control Application.
 It supports ArtNet with unlimited Universes (ok nearly unlimited).
 
 ## Installation
-1. Run the Server as a Docker Container: `docker run --restart=always -p 8080:8080 raynigon/raylight`
+1. Run the Server as a Docker Container: `docker run --restart=always -p 8080:8080 -e APP_ARTNET_OUTPUTS_0_ADDRESS=<YOUR_NODE_IP> raynigon/raylight`
 2. Now you can open the app in your local browser with: [http://localhost:8080](http://localhost:8080)
-3. Configure your ArtNet Adapter and start playing around
+3. Create a dashboard with panels, now you`re able to control your lights
 
 ## Features
 
