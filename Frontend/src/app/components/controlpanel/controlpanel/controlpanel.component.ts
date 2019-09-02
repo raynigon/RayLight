@@ -82,6 +82,9 @@ export class ControlPanelComponent {
       } as ISliderPanel;
     }
     if (panel != null) {
+      if (!this.controlPanel.data.panels) {
+        this.controlPanel.data.panels = [];
+      }
       this.controlPanel.data.panels.push(panel);
     }
   }

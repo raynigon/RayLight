@@ -8,7 +8,16 @@ import { DashboardComponent } from './components/programmer/dashboard/dashboard.
 import { ControlPanelComponent } from './components/controlpanel/controlpanel/controlpanel.component';
 import { ControlPanelService } from './services/ControlPanelService';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatIconModule, MatMenuModule, MatDialogModule, MatExpansionModule, MatFormFieldModule, MatInputModule, MatSelectModule } from '@angular/material';
+import {
+  MatButtonModule,
+  MatIconModule,
+  MatMenuModule,
+  MatDialogModule,
+  MatExpansionModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatSelectModule
+} from '@angular/material';
 import { DMXService } from './services/DMXService';
 import { ButtonPanelComponent } from './components/controlpanel/buttonpanel/buttonpanel.component';
 import { SliderPanelComponent } from './components/controlpanel/sliderpanel/sliderpanel.component';

@@ -34,7 +34,7 @@ export class ControlPanelService {
     if (!result.data) {
       result.data = '{}';
     }
-    console.log("Parse:", result.data);
+    console.log('Parse:', result.data);
     result.data = JSON.parse(result.data);
     return result;
   }
