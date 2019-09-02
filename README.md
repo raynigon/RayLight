@@ -16,8 +16,10 @@ It supports ArtNet with unlimited Universes (ok nearly unlimited).
 
 ## Features
 
- - ArtNet Support
- - Unlimited Universes
+ - ArtNet support
+ - Unlimited universes
+ - Dynamic configurable control boards
+ - Multitouch support
  - ...
 
 ## Dependencies
