@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - changeSet:
+      id: 3-cue-init
+      author: simon-schneider
+      changes:
+        - createTable:
+            tableName: cue
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+              - column:
+                  name: cuelist
+                  type: int
+                  constraints:
+                    references: cuelist(id)
+                    foreignKeyName: cue-to-cuelist-key

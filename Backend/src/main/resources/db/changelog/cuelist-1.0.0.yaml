@@ -1,0 +1,20 @@
+databaseChangeLog:
+  - changeSet:
+      id: 3-cuelist-init
+      author: simon-schneider
+      changes:
+        - createTable:
+            tableName: cuelist
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+              - column:
+                  name: mode
+                  type: int

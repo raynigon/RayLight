@@ -2,8 +2,10 @@ package com.raynigon.raylight.controller;
 
 import java.util.List;
 
+import com.raynigon.raylight.model.CueListMetaData;
 import com.raynigon.raylight.model.DMXUniverse;
 import com.raynigon.raylight.model.UniverseMetaData;
+import com.raynigon.raylight.repository.CueListRepository;
 import com.raynigon.raylight.repository.UniverseMetaDataRepository;
 import com.raynigon.raylight.service.DMXUniverseService;
 
@@ -22,29 +24,28 @@ import org.springframework.web.client.HttpClientErrorException;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/universe")
-public class UniverseController {
+@RequestMapping("/api/cuelist")
+public class CueListController {
 
-    private final DMXUniverseService universeService;
-    private final UniverseMetaDataRepository repository;
+    private final CueListRepository repository;
 
     @PostMapping
-    public UniverseMetaData create(@RequestBody UniverseMetaData dmxInfo) {
-        return repository.save(dmxInfo);
+    public CueListMetaData create(@RequestBody CueListMetaData cueList) {
+        return repository.save(cueList);
     }
 
     @PutMapping
-    public UniverseMetaData update(@RequestBody UniverseMetaData dmxInfo) {
-        return repository.save(dmxInfo);
+    public CueListMetaData update(@RequestBody CueListMetaData cueList) {
+        return repository.save(cueList);
     }
 
     @GetMapping("{id}")
-    public UniverseMetaData get(@PathVariable("id") int id) {
+    public CueListMetaData get(@PathVariable("id") int id) {
         return repository.findById(id).orElseThrow(()->new HttpClientErrorException(HttpStatus.NOT_FOUND));
     }
 
     @GetMapping
-    public List<UniverseMetaData> list() {
+    public List<CueListMetaData> list() {
         return repository.findAll();
     }
 
@@ -53,13 +54,29 @@ public class UniverseController {
         repository.deleteById(id);
     }
 
-    @Deprecated
-    @PostMapping("{id}/dmx/channel/{channel}/{value}")
-    public void create(@PathVariable("id") int id, @PathVariable("channel") int channel, @PathVariable("value") int value) {
-        DMXUniverse universe = universeService.getUniverse(id);
-        if(universe == null){
-            throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
-        }
-        universe.setValue(channel, value);
+    @PostMapping("{cuelist}/cue")
+    public CueListMetaData createCue(@RequestBody CueListMetaData cueList) {
+        return repository.save(cueList);
     }
+
+    @PutMapping("{cuelist}/cue")
+    public CueListMetaData updateCue(@RequestBody CueListMetaData cueList) {
+        return repository.save(cueList);
+    }
+
+    @GetMapping("{cuelist}/cue/{id}")
+    public CueListMetaData getCue(@PathVariable("id") int id) {
+        return repository.findById(id).orElseThrow(()->new HttpClientErrorException(HttpStatus.NOT_FOUND));
+    }
+
+    @GetMapping("{cuelist}/cue")
+    public List<CueListMetaData> listCues() {
+        return repository.findAll();
+    }
+
+    @DeleteMapping("{cuelist}/cue/{id}")
+    public void deleteCue(@PathVariable("id") int id) {
+        repository.deleteById(id);
+    }
+
 }
