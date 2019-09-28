@@ -43,12 +43,12 @@ public class CueController {
     }
 
     @GetMapping("{cuelist}/cue/{id}")
-    public CueMetaData getCue(@PathVariable("id") int id) {
+    public CueMetaData getCue(@PathVariable("cuelist") int cueListId, @PathVariable("id") int id) {
         return repository.findById(id).orElseThrow(()->new HttpClientErrorException(HttpStatus.NOT_FOUND));
     }
 
     @DeleteMapping("{cuelist}/cue/{id}")
-    public void deleteCue(@PathVariable("id") int id) {
+    public void deleteCue(@PathVariable("cuelist") int cueListId, @PathVariable("id") int id) {
         repository.deleteById(id);
     }
 

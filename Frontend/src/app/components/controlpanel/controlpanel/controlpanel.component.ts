@@ -50,10 +50,10 @@ export class ControlPanelComponent {
           height: 100
         },
         styles: {
-          backgroundActive: 'red',
-          backgroundInactive: '',
-          colorActive: 'blue',
-          colorInactive: ''
+          backgroundActive: '#000000',
+          backgroundInactive: '#212121',
+          colorActive: '#A0A0A0',
+          colorInactive: '#FFFFFF'
         },
         action: {
           type: 'set-dmx-value',

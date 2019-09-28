@@ -1,4 +1,5 @@
 import { IPanel } from './IPanel';
+import { ICueList } from './ICueList';
 
 
 export interface IButtonPanel extends IPanel {
@@ -18,4 +19,6 @@ export interface IButtonAction {
     type: string;
     channel: number;
     value: number;
+    cuelist?: ICueList;
+    cue?: number;
 }

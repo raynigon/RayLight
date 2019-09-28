@@ -9,6 +9,7 @@ databaseChangeLog:
               - column:
                   name: id
                   type: int
+                  autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
@@ -21,3 +22,6 @@ databaseChangeLog:
                   constraints:
                     references: cuelist(id)
                     foreignKeyName: cue-to-cuelist-key
+              - column:
+                  name: actions
+                  type: TEXT

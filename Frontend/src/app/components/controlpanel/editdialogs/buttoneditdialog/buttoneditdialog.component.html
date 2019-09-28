@@ -18,13 +18,28 @@
                 <mat-select [(ngModel)]="data.action.type">
                     <mat-option value="set-dmx-value">Set DMX Value</mat-option>
                     <mat-option value="toggle-dmx-value">Toggle DMX Value</mat-option>
+                    <mat-option value="play-cuelist">Play CueList</mat-option>
+                    <mat-option value="stop-cuelist">Stop CueList</mat-option>
+                    <mat-option value="go-to-cue">Go to Cue</mat-option>
                 </mat-select>
             </mat-form-field>
-            <mat-form-field class="form-field">
+            <mat-form-field class="form-field" *ngIf="data.action.type == 'set-dmx-value' || data.action.type == 'toggle-dmx-value'">
                 <input matInput type="number" min="0" max="512" [(ngModel)]="data.action.channel" placeholder="Channel">
             </mat-form-field>
-            <mat-form-field class="form-field">
+            <mat-form-field class="form-field" *ngIf="data.action.type == 'set-dmx-value' || data.action.type == 'toggle-dmx-value'">
                 <input matInput type="number" min="0" max="255" [(ngModel)]="data.action.value" placeholder="Value">
+            </mat-form-field>
+            <mat-form-field class="form-field" *ngIf="data.action.type == 'play-cuelist' || data.action.type == 'stop-cuelist' || data.action.type == 'go-to-cue'">
+                <mat-label>CueList</mat-label>
+                <mat-select [(ngModel)]="data.action.cuelist">
+                    <mat-option *ngFor="let cuelist of cuelists" [value]="cuelist">{{cuelist.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="form-field" *ngIf="data.action.type == 'go-to-cue'">
+                <mat-label>Cue</mat-label>
+                <mat-select [(ngModel)]="data.action.cue">
+                    <mat-option *ngFor="let cue of getCues(data.action.cuelist)" [value]="cue.id">{{cue.id}}</mat-option>
+                </mat-select>
             </mat-form-field>
         </mat-expansion-panel>
         <mat-expansion-panel>

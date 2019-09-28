@@ -24,6 +24,8 @@ import { SliderPanelComponent } from './components/controlpanel/sliderpanel/slid
 import { ButtonEditDialogComponent } from './components/controlpanel/editdialogs/buttoneditdialog/buttoneditdialog.component';
 import { FormsModule } from '@angular/forms';
 import { SliderEditDialogComponent } from './components/controlpanel/editdialogs/slidereditdialog/slidereditdialog.component';
+import { CueListService } from './services/CueListService';
+import { ShowService } from './services/ShowService';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,7 @@ import { SliderEditDialogComponent } from './components/controlpanel/editdialogs
     ButtonEditDialogComponent,
     SliderEditDialogComponent,
   ],
-  providers: [ControlPanelService, DMXService],
+  providers: [ControlPanelService, DMXService, CueListService, ShowService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

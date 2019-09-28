@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { IButtonPanel } from 'src/app/model/panels/IButtonPanel';
 import { DMXService } from 'src/app/services/DMXService';
+import { ShowService } from 'src/app/services/ShowService';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class ButtonPanelComponent {
 
   private lastAction: number;
 
-  constructor(private output: DMXService) {}
+  constructor(private output: DMXService, private show: ShowService) {}
 
   public action(event) {
     event.preventDefault();
@@ -33,6 +34,12 @@ export class ButtonPanelComponent {
     } else if (action.type === 'toggle-dmx-value') {
       this.output.updateDmxValue(action.channel, this.active ? 0 : action.value);
       this.active = !this.active;
+    } else if (action.type === 'play-cuelist') {
+      this.show.playCuelist(action.cuelist.id);
+    } else if (action.type === 'stop-cuelist') {
+      this.show.stopCuelist(action.cuelist.id);
+    } else if (action.type === 'go-to-cue') {
+      this.show.goToCue(action.cuelist.id, action.cue);
     }
   }
 

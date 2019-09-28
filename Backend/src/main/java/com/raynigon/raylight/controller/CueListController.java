@@ -53,30 +53,4 @@ public class CueListController {
     public void delete(@PathVariable("id") int id) {
         repository.deleteById(id);
     }
-
-    @PostMapping("{cuelist}/cue")
-    public CueListMetaData createCue(@RequestBody CueListMetaData cueList) {
-        return repository.save(cueList);
-    }
-
-    @PutMapping("{cuelist}/cue")
-    public CueListMetaData updateCue(@RequestBody CueListMetaData cueList) {
-        return repository.save(cueList);
-    }
-
-    @GetMapping("{cuelist}/cue/{id}")
-    public CueListMetaData getCue(@PathVariable("id") int id) {
-        return repository.findById(id).orElseThrow(()->new HttpClientErrorException(HttpStatus.NOT_FOUND));
-    }
-
-    @GetMapping("{cuelist}/cue")
-    public List<CueListMetaData> listCues() {
-        return repository.findAll();
-    }
-
-    @DeleteMapping("{cuelist}/cue/{id}")
-    public void deleteCue(@PathVariable("id") int id) {
-        repository.deleteById(id);
-    }
-
 }
