@@ -1,0 +1,13 @@
+<table>
+    <tr>
+        <td>Id: &nbsp; {{cue.id}}</td>
+        <td>Actions: &nbsp; {{cue.actions.length}}</td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <mat-form-field>
+                <input matInput [(ngModel)]="cue.name" placeholder="Name">
+            </mat-form-field>
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,30 @@
+<table>
+    <tr>
+        <td>
+            <mat-form-field>
+                <input matInput [(ngModel)]="cueList.name" placeholder="Name">
+            </mat-form-field>
+        </td>
+        <td>
+            <mat-form-field>
+                <mat-label>Mode</mat-label>
+                <mat-select [(ngModel)]="cueList.mode" placeholder="Mode">
+                    <mat-option value="DEFAULT">Default</mat-option>
+                    <mat-option value="CHASER_FORWARD">Chaser Forward</mat-option>
+                    <mat-option value="CHASER_BACKWARD">Chaser Backward</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </td>
+    </tr>
+    <tr>
+        <td>Cues:</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <mat-list role="list">
+                <mat-list-item role="listitem" *ngFor="let cue of cueList.cues">{{cue.name}}</mat-list-item>
+            </mat-list>
+        </td>
+    </tr>
+</table>

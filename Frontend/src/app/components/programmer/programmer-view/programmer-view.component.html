@@ -1,0 +1,85 @@
+<div class="content">
+    <as-split unit="percent" direction="horizontal" #content="asSplit">
+        <as-split-area size="30" #cuelistsView="asSplitArea">
+            <div *ngIf="activeCuelist==null">
+                <div class="navigation-bar">
+                    <span>CueLists</span>
+                </div>
+                <div *ngFor="let cuelist of cuelists" class="list-item list-item-cuelist"
+                    (click)="selectCuelist(cuelist)">
+                    <div class="list-item-content">
+                        <div class="cuelist-name">{{ cuelist.name }}</div>
+                        <div class="cuelist-cues">
+                            <span class="cue-name">{{ getActiveCue(cuelist)?.name}}</span>
+                            <span
+                                class="cue-index">{{ getActiveCue(cuelist)?.id || "-" }}/{{ cuelist.cues.length }}</span>
+                        </div>
+                    </div>
+                    <span class="open-icon">&gt;</span>
+                </div>
+                <div class="list-item add-item">
+                    <button mat-button (click)="createCueList()">
+                        <mat-icon>add</mat-icon>Add CueList
+                    </button>
+                </div>
+            </div>
+            <div *ngIf="activeCuelist!=null && activeCue == null">
+                <div class="navigation-bar">
+                    <button mat-button (click)="activeCuelist = null;activeCue = null;activeAction = null">&lt;back</button>
+                    <button mat-button (click)="activeCue = null">{{ activeCuelist.name }}</button>
+                    <button mat-button (click)="deleteCueList(activeCuelist)" [disabled]="activeCuelist.cues.length>0">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
+                <div *ngFor="let cue of activeCuelist.cues" class="list-item list-item-cue" (click)="activeCue=cue"
+                    [attr.active]="activeCue==cue">
+                    <div class="list-item-content">
+                        <div class="cue-name">{{ cue.name }}</div>
+                    </div>
+                    <span class="open-icon">&gt;</span>
+                </div>
+                <div class="list-item add-item">
+                    <button mat-button (click)="createCue()">
+                        <mat-icon>add</mat-icon>Add Cue
+                    </button>
+                </div>
+            </div>
+            <div *ngIf="activeCuelist != null && activeCue != null">
+                <div class="navigation-bar">
+                    <button mat-button (click)="activeCue = null;activeAction = null">&lt;back</button>
+                    <button mat-button (click)="activeAction = null">{{ activeCue.name }}</button>
+                    <button mat-button (click)="deleteCue(activeCue);activeCue=null"
+                        [disabled]="activeCue.actions.length>0">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
+                <div *ngFor="let action of activeCue.actions" class="list-item list-item-cue"
+                    (click)="activeAction=action" [attr.active]="activeAction==action">
+                    <div class="list-item-content">
+                        <div class="cue-name">{{ action.type }}</div>
+                    </div>
+                    <span class="open-icon">&gt;</span>
+                </div>
+                <div class="list-item add-item">
+                    <button mat-button (click)="createCueAction()">
+                        <mat-icon>add</mat-icon>Add Action
+                    </button>
+                </div>
+            </div>
+        </as-split-area>
+        <as-split-area size="70" #cueEditorView="asSplitArea" class="editor">
+            <div *ngIf="activeCuelist == null  && activeCue == null  && activeAction == null">
+                Default View
+            </div>
+            <div *ngIf="activeCuelist != null && activeCue == null && activeAction == null">
+                <app-cue-list-editor [cueList]="activeCuelist" (update)="updateCueList(activeCuelist)"></app-cue-list-editor>
+            </div>
+            <div *ngIf="activeCuelist != null && activeCue != null && activeAction == null">
+                <app-cue-editor [cue]="activeCue" (update)="updateCue(activeCue)"></app-cue-editor>
+            </div>
+            <div *ngIf="activeAction != null">
+                <app-cue-action-editor [action]="activeAction" (update)="updateCue(activeCue)"></app-cue-action-editor>
+            </div>
+        </as-split-area>
+    </as-split>
+</div>

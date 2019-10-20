@@ -1,6 +1,5 @@
 package com.raynigon.raylight.controller;
 
-import com.raynigon.raylight.model.CueListMetaData;
 import com.raynigon.raylight.service.ShowService;
 
 import lombok.RequiredArgsConstructor;

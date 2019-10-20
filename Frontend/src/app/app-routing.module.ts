@@ -2,12 +2,13 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './components/programmer/dashboard/dashboard.component';
 import { ControlPanelComponent } from './components/controlpanel/controlpanel/controlpanel.component';
+import { ProgrammerContainerComponent } from './components/programmer/programmer-container/programmer-container.component';
 
 
 const routes: Routes = [
   {
     path: '',
-    component: DashboardComponent
+    component: ProgrammerContainerComponent
   },
   {
     path: 'controlpanel/:id',

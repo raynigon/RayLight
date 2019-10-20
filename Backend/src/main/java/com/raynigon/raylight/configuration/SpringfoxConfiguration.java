@@ -15,7 +15,7 @@ public class SpringfoxConfiguration {
     @Bean
     public Docket productsApi() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("search-service")
+                .groupName("raylight")
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.raynigon.raylight"))
                 .build()

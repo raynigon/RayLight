@@ -1,0 +1,19 @@
+<mat-menu #dashboardMenu="matMenu">
+    <button mat-menu-item (click)="openDashboardSettings()">
+        <mat-icon>list</mat-icon>
+        <span>Dashboards</span>
+    </button>
+    <button mat-menu-item *ngFor="let panel of panels" [routerLink]="'/controlpanel/'+panel.id">
+        <mat-icon>dashboard</mat-icon>
+        <span>{{panel.name}}</span>
+    </button>
+</mat-menu>
+
+<mat-toolbar>
+    <span>RayLight</span>
+    <span class="spacer-small"></span>
+    <button mat-icon-button [matMenuTriggerFor]="dashboardMenu">
+        <mat-icon>dashboard</mat-icon>
+    </button>
+</mat-toolbar>
+<app-programmer-view></app-programmer-view>

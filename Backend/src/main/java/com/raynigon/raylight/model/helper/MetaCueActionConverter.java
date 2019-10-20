@@ -14,7 +14,7 @@ import lombok.SneakyThrows;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MetaCueActionConverter  implements AttributeConverter<List<CueAction>, String> {
+public class MetaCueActionConverter implements AttributeConverter<List<CueAction>, String> {
 
     private ObjectMapper mapper = new ObjectMapper();
 
@@ -27,9 +27,13 @@ public class MetaCueActionConverter  implements AttributeConverter<List<CueActio
     @Override
     @SneakyThrows
     public List<CueAction> convertToEntityAttribute(String dbData) {
-        if (dbData == null || dbData.isEmpty()){
+        if (dbData == null || dbData.isEmpty()) {
             return Collections.emptyList();
         }
-        return Arrays.asList(mapper.readValue(dbData, CueAction[].class));
+        CueAction[] cueActions = mapper.readValue(dbData, CueAction[].class);
+        if (cueActions == null) {
+            return Collections.emptyList();
+        }
+        return Arrays.asList(cueActions);
     }
 }

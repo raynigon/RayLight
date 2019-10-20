@@ -1,0 +1,19 @@
+<mat-form-field>
+    <mat-label>Mode</mat-label>
+    <mat-select [(ngModel)]="action.type" placeholder="Type">
+        <mat-option value="dmx-value">DMX Value</mat-option>
+    </mat-select>
+</mat-form-field>
+<div *ngIf="action.type=='dmx-value'">
+    <mat-form-field>
+        <mat-label>Universe</mat-label>
+        <mat-select [(ngModel)]="action.universe" placeholder="Universe">
+            <mat-option value="0">0</mat-option>
+            <mat-option value="1">1</mat-option>
+            <!-- TODO make this generic -->
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput type="number" [(ngModel)]="cueList.name" placeholder="Name">
+    </mat-form-field>
+</div>

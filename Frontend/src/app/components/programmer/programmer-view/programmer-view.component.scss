@@ -1,0 +1,80 @@
+.content {
+    display: flex;
+    width: 100%;
+    height: calc(100% - 64px);
+}
+
+.navigation-bar {
+  display: flex;
+  height: 40px;
+  justify-content: space-between;
+  border-bottom: 1px solid #00000060;
+  color: white;
+  background-color: #212121;
+  border-top: 1px solid white;
+
+  span {
+    line-height: 40px;
+    text-align: center;
+    flex-grow: 1;
+  }
+}
+
+.list-item {
+  width: 100%;
+  height: 50px;
+  padding: 5px;
+  display: flex;
+  cursor: pointer;
+
+
+  .list-item-content {
+    flex-grow: 1;
+  }
+
+  .open-icon {
+    line-height: 20px;
+    padding: 10px;
+  }
+
+  + .list-item {
+    border-top: 1px solid #00000060;
+  }
+}
+
+.list-item-cue {
+
+  &[active="true"] {
+    background: #00000060;
+  }
+}
+
+.list-item-cuelist {
+  
+}
+
+.add-item {
+  display: flex;
+  justify-content: center;
+}
+
+.cuelist-name {
+  display: block;
+}
+
+.cuelist-cues {
+  padding-top: 5px;
+  display: flex;
+  font-size: 0.8em;
+  color: #606060;
+
+  .cue-name {
+    flex-grow: 1;
+  }
+}
+
+.editor {
+  padding: 10px;
+  color: white;
+  background-color: #212121;
+}

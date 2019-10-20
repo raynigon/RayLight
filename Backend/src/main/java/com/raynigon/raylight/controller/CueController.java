@@ -30,25 +30,28 @@ public class CueController {
 
     @PostMapping("{cuelist}/cue")
     public CueMetaData createCue(@PathVariable("cuelist") int cueListId, @RequestBody CueMetaData cue) {
-        CueListMetaData cueList = cuelistsRepository.findById(cueListId).orElseThrow(()->new HttpClientErrorException(HttpStatus.NOT_FOUND));
+        CueListMetaData cueList = cuelistsRepository.findById(cueListId).orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
         cue.setCuelist(cueList);
         return repository.save(cue);
     }
 
     @PutMapping("{cuelist}/cue")
     public CueMetaData updateCue(@PathVariable("cuelist") int cueListId, @RequestBody CueMetaData cue) {
-        CueListMetaData cueList = cuelistsRepository.findById(cueListId).orElseThrow(()->new HttpClientErrorException(HttpStatus.NOT_FOUND));
+        CueListMetaData cueList = cuelistsRepository.findById(cueListId).orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
         cue.setCuelist(cueList);
         return repository.save(cue);
     }
 
     @GetMapping("{cuelist}/cue/{id}")
     public CueMetaData getCue(@PathVariable("cuelist") int cueListId, @PathVariable("id") int id) {
-        return repository.findById(id).orElseThrow(()->new HttpClientErrorException(HttpStatus.NOT_FOUND));
+        return repository.findById(id).orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
     }
 
     @DeleteMapping("{cuelist}/cue/{id}")
     public void deleteCue(@PathVariable("cuelist") int cueListId, @PathVariable("id") int id) {
+        CueListMetaData cueList = cuelistsRepository.findById(cueListId).orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
+        cueList.getCues().removeIf(cue->cue.getId() == id);
+        cuelistsRepository.save(cueList);
         repository.deleteById(id);
     }
 
